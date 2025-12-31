@@ -3,25 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMO MASTER - Trinity Core</title>
+    <title>AMO MASTER - Ad-Reward & Partner System</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pyidaungsu&display=swap');
-        body { 
-            margin: 0; background: #0d1117; color: #c9d1d9; 
-            font-family: 'Pyidaungsu', 'Unicode', 'Zawgyi', sans-serif;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;
-        }
-        .amo-logo { 
-            width: 80px; height: 80px; border: 2px solid #f9e21a; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: bold; color: #f9e21a; margin-bottom: 20px;
-        }
+        body { background: #050505; color: #00ff00; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; }
+        .master-box { border: 2px solid #00ff00; padding: 25px; border-radius: 20px; max-width: 500px; margin: auto; box-shadow: 0 0 20px #00ff00; }
+        .btn { background: #00ff00; color: black; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin: 10px; }
+        .wallet-display { font-size: 28px; color: gold; margin: 20px 0; }
+        #lock-status { color: red; font-weight: bold; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div class="amo-logo">AMO</div>
-    <h1>TRINITY CORE v2.1</h1>
-    <p>Foundation Status: <span style="color:#4caf50;">ONLINE ✅</span></p>
-    <p style="font-size: 0.9rem; opacity: 0.7;">ညကျရင် ရောက်လာမယ့် "အသက်သွေးကြော" ကို စောင့်ဆိုင်းနေပါသည်...</p>
+
+    <div class="master-box">
+        <h1>AMO MASTER 🚀</h1>
+        <p>Partner Support: 09 784 643 635</p>
+        
+        <div id="system-ui">
+            <div class="wallet-display">ဘုံပိုက်ဆံအိတ်: <span id="balance">0.00</span> USDT</div>
+            <p>ကြည့်ရှုသူ (Real Users): <span id="user-count">0</span> / 100</p>
+            <p>System Status: <span id="status">Online</span></p>
+            <button class="btn" onclick="watchAd()">ကြော်ငြာကြည့်ပြီး ပိုက်ဆံရှာရန်</button>
+        </div>
+
+        <div id="lock-screen" class="hidden">
+            <h2 style="color: red;">SYSTEM LOCKED 🔐</h2>
+            <input type="password" id="masterKey" placeholder="Enter Master Key">
+            <button class="btn" onclick="unlockSystem()">Unlock</button>
+        </div>
+    </div>
+
+    <script>
+        let balance = 0;
+        let users = 0;
+        let isLocked = false;
+
+        // ကြော်ငြာကြည့်တဲ့ Logic
+        function watchAd() {
+            if(isLocked) return alert("System is Locked by Master!");
+            alert("ကြော်ငြာပြသနေသည်... (၃၀ စက္ကန့်)");
+            setTimeout(() => {
+                balance += 0.05; // ဘုံပိုက်ဆံအိတ်ထဲ တိုးမယ်
+                users += 1;
+                document.getElementById('balance').innerText = balance.toFixed(2);
+                document.getElementById('user-count').innerText = users;
+                if(users >= 100) alert("Master! လူ ၁၀၀ ပြည့်ပါပြီ။ စာရင်းစစ်နိုင်ပါပြီ။");
+            }, 2000); // ဥပမာအနေနဲ့ ၂ စက္ကန့်ထားပေးပါတယ်
+        }
+
+        // Master Lock စနစ်
+        function lockSystem() {
+            isLocked = true;
+            document.getElementById('system-ui').classList.add('hidden');
+            document.getElementById('lock-screen').classList.remove('hidden');
+        }
+
+        function unlockSystem() {
+            let key = document.getElementById('masterKey').value;
+            if(key === "999") { // ဆရာကြီးရဲ့ လျှို့ဝှက်ကုဒ်
+                isLocked = false;
+                document.getElementById('system-ui').classList.remove('hidden');
+                document.getElementById('lock-screen').classList.add('hidden');
+            } else {
+                alert("ကုဒ်မှားနေသည် Partner!");
+            }
+        }
+
+        // ညပိုင်း Pilot Bot ၁၀ ကောင် Auto Activation
+        const hour = new Date().getHours();
+        if(hour >= 21 || hour <= 6) {
+            console.log("Pilot Bots 10 Active for Night Shift...");
+            // ညပိုင်းအတွက် Pilot Logic ဒီမှာ အလုပ်လုပ်မယ်
+        }
+    </script>
 </body>
 </html>
